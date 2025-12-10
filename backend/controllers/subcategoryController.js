@@ -23,36 +23,6 @@ exports.getSubcategories = async (req, res) => {
   }
 };
 
-// @desc    Get single subcategory
-// @route   GET /api/subcategories/:id
-// @access  Private
-exports.getSubcategory = async (req, res) => {
-  try {
-    const subcategory = await Subcategory.findById(req.params.id).populate(
-      "category",
-      "categoryName"
-    );
-
-    if (!subcategory) {
-      return res.status(404).json({
-        success: false,
-        message: "Subcategory not found",
-      });
-    }
-
-    res.status(200).json({
-      success: true,
-      data: subcategory,
-    });
-  } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: "Error fetching subcategory",
-      error: error.message,
-    });
-  }
-};
-
 // @desc    Create subcategory
 // @route   POST /api/subcategories
 // @access  Private

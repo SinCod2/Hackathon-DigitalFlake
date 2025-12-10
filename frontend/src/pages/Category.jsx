@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import { categoryAPI } from "../utils/api";
-import { FiEdit2, FiTrash2, FiPlus, FiX, FiImage } from "react-icons/fi";
+import { FiEdit2, FiTrash2, FiPlus, FiX, FiImage, FiChevronUp, FiChevronDown } from "react-icons/fi";
 import {
   useReactTable,
   getCoreRowModel,
@@ -20,6 +20,7 @@ const Category = () => {
   const [categoryToDelete, setCategoryToDelete] = useState(null);
   const [editingCategory, setEditingCategory] = useState(null);
   const [globalFilter, setGlobalFilter] = useState("");
+  const [sorting, setSorting] = useState([]);
   const [imagePreview, setImagePreview] = useState("");
   const [formData, setFormData] = useState({
     categoryName: "",
@@ -222,8 +223,10 @@ const Category = () => {
     columns,
     state: {
       globalFilter,
+      sorting,
     },
     onGlobalFilterChange: setGlobalFilter,
+    onSortingChange: setSorting,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
@@ -265,9 +268,30 @@ const Category = () => {
                       key={header.id}
                       className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider"
                     >
-                      {flexRender(
-                        header.column.columnDef.header,
-                        header.getContext()
+                      {header.isPlaceholder ? null : (
+                        <div
+                          className={header.column.getCanSort() ? "flex items-center gap-2 cursor-pointer select-none hover:text-gray-900" : "flex items-center gap-2"}
+                          onClick={header.column.getToggleSortingHandler()}
+                        >
+                          {flexRender(
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )}
+                          {header.column.getCanSort() && (
+                            <span className="flex flex-col">
+                              {header.column.getIsSorted() === "asc" ? (
+                                <FiChevronUp className="text-gray-900" size={16} />
+                              ) : header.column.getIsSorted() === "desc" ? (
+                                <FiChevronDown className="text-gray-900" size={16} />
+                              ) : (
+                                <div className="flex flex-col opacity-40">
+                                  <FiChevronUp size={12} style={{ marginBottom: -6 }} />
+                                  <FiChevronDown size={12} />
+                                </div>
+                              )}
+                            </span>
+                          )}
+                        </div>
                       )}
                     </th>
                   ))}

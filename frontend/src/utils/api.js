@@ -36,7 +36,6 @@ api.interceptors.response.use(
 // Category API
 export const categoryAPI = {
   getAll: () => api.get("/categories"),
-  getOne: (id) => api.get(`/categories/${id}`),
   create: (data) => api.post("/categories", data),
   update: (id, data) => api.put(`/categories/${id}`, data),
   delete: (id) => api.delete(`/categories/${id}`),
@@ -45,7 +44,6 @@ export const categoryAPI = {
 // Subcategory API
 export const subcategoryAPI = {
   getAll: () => api.get("/subcategories"),
-  getOne: (id) => api.get(`/subcategories/${id}`),
   create: (data) => api.post("/subcategories", data),
   update: (id, data) => api.put(`/subcategories/${id}`, data),
   delete: (id) => api.delete(`/subcategories/${id}`),
@@ -54,7 +52,6 @@ export const subcategoryAPI = {
 // Product API
 export const productAPI = {
   getAll: () => api.get("/products"),
-  getOne: (id) => api.get(`/products/${id}`),
   create: (data) => api.post("/products", data),
   update: (id, data) => api.put(`/products/${id}`, data),
   delete: (id) => api.delete(`/products/${id}`),

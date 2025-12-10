@@ -12,7 +12,7 @@ const Dashboard = () => {
           </div>
         </div>
         <h1 className="text-4xl font-bold text-gray-800 mb-4">digitalflake</h1>
-        <p className="text-xl text-gray-600">Welcome to Digitalflake admin</p>
+        <p className="text-xl text-gray-600">{user?.name} Welcome to Digitalflake admin</p>
       </div>
     </div>
   );

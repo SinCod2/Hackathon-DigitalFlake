@@ -21,33 +21,6 @@ exports.getCategories = async (req, res) => {
   }
 };
 
-// @desc    Get single category
-// @route   GET /api/categories/:id
-// @access  Private
-exports.getCategory = async (req, res) => {
-  try {
-    const category = await Category.findById(req.params.id);
-
-    if (!category) {
-      return res.status(404).json({
-        success: false,
-        message: "Category not found",
-      });
-    }
-
-    res.status(200).json({
-      success: true,
-      data: category,
-    });
-  } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: "Error fetching category",
-      error: error.message,
-    });
-  }
-};
-
 // @desc    Create category
 // @route   POST /api/categories
 // @access  Private

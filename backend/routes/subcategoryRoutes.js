@@ -2,7 +2,6 @@ const express = require("express");
 const { protect } = require("../middleware/auth");
 const {
   getSubcategories,
-  getSubcategory,
   createSubcategory,
   updateSubcategory,
   deleteSubcategory,
@@ -15,10 +14,6 @@ router.use(protect);
 
 router.route("/").get(getSubcategories).post(createSubcategory);
 
-router
-  .route("/:id")
-  .get(getSubcategory)
-  .put(updateSubcategory)
-  .delete(deleteSubcategory);
+router.route("/:id").put(updateSubcategory).delete(deleteSubcategory);
 
 module.exports = router;

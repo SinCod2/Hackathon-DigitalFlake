@@ -24,35 +24,6 @@ exports.getProducts = async (req, res) => {
   }
 };
 
-// @desc    Get single product
-// @route   GET /api/products/:id
-// @access  Private
-exports.getProduct = async (req, res) => {
-  try {
-    const product = await Product.findById(req.params.id)
-      .populate("category", "categoryName")
-      .populate("subcategory", "subcategoryName");
-
-    if (!product) {
-      return res.status(404).json({
-        success: false,
-        message: "Product not found",
-      });
-    }
-
-    res.status(200).json({
-      success: true,
-      data: product,
-    });
-  } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: "Error fetching product",
-      error: error.message,
-    });
-  }
-};
-
 // @desc    Create product
 // @route   POST /api/products
 // @access  Private
